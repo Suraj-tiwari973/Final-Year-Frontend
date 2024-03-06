@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Home from './pages/homePage/Home';
+import AdminLogin from './pages/adminPage/AdminLogin';
+import AdminRegister from './pages/adminPage/AdminRegister';
+import User from './pages/userPage/UserLogin';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+      <Routes>
+      <Route exact path="/" element={<Home/>}></Route> 
+        <Route exact path="/adminLogin" element={<AdminLogin/>}></Route>
+        <Route exact path="/adminRegister" element={<AdminRegister/>}></Route>  
+        <Route exact path="/user" element={<User/>}></Route> 
+    </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
 export default App;
