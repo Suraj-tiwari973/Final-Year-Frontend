@@ -14,7 +14,6 @@ import { Link, useNavigate } from "react-router-dom";
 import M from "materialize-css";
 import { useState } from "react";
 import axios from "axios";
-import adminDashboard from "./AdminDashboard";
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
