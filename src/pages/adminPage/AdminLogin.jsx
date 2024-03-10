@@ -25,8 +25,6 @@ export default function AdminLogin() {
     password: "",
   });
 
-  // const navigate = useNavigate();
-
   const [isFormValid, setIsFormValid] = useState(true);
   const [passwordError, setPasswordError] = useState("");
 
