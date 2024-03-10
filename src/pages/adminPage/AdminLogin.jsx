@@ -38,7 +38,7 @@ export default function AdminLogin() {
 
     setPasswordError("");
 
-    // perform password validation.
+    // perform password validation...
 
     if (formData.password.length < 8) {
       setPasswordError("Password must be at least 8 characters long.");
