@@ -34,17 +34,22 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Admin
+                Login/Signup
               </Link>
               <ul className="dropdown-menu">
+                <li>
+                  <Link className="dropdown-item" to="/adminRegister">
+                    Admin Signup
+                  </Link>
+                </li>
                 <li>
                   <Link className="dropdown-item" to="/adminLogin">
                     Admin Login
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="adminRegister">
-                    Admin Signup
+                  <Link className="dropdown-item" to="/policeLogin">
+                    Police Login
                   </Link>
                 </li>
               </ul>

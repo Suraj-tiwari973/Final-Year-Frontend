@@ -1,0 +1,34 @@
+/* PoliceRegister.css */
+  .form-header {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  form{
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+  .form-container{
+    overflow-y: auto;
+    margin-top: 70px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    background-color:blue;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .left {
+    font-weight: bold;
+  }
+  
+  

@@ -11,9 +11,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import M from "materialize-css";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -44,8 +45,8 @@ export default function AdminRegister() {
 
     // perform password validation.
 
-    if (formData.password.length < 8) {
-      setPasswordError("Password must be at least 8 characters long.");
+    if (formData.password.length < 4) {
+      setPasswordError("Password must be at least 4 characters long.");
       setIsFormValid(false);
       return;
     }
@@ -57,15 +58,19 @@ export default function AdminRegister() {
       try {
         const response = await axios.post(
           "http://127.0.0.1:3002/api/admin/adminRegister",
-          formData
+          formData,        {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         console.log("API Response:", response.data);
         if(response.data.error){
-          M.toast({ html: response.data.error, classes: "#f44336 red" });
+          toast.error(response.data.error)
           return;
         }
         else{
-          M.toast({html:response.data.message,classes:"#2e7d32 green darken-3"});
+          toast.success(response.data.message)
           setTimeout(()=>{
             navigate("/adminLogin"); // user will navigeted to login page after successful signup.
           },1000)
@@ -78,7 +83,8 @@ export default function AdminRegister() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
+        <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -167,5 +173,7 @@ export default function AdminRegister() {
         </Grid>
       </Grid>
     </ThemeProvider>
+    <ToastContainer/>
+    </>
   );
 }

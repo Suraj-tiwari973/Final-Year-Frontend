@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import PoliceLogin from "./pages/policePage/PoliceLogin";
 import AdminDashboard from "./pages/adminPage/AdminDashboard";
+import PoliceRegister from "./pages/policePage/PoliceRegister";
+
 
 const App = () => {
   return (
@@ -16,14 +18,11 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/adminLogin" element={<AdminLogin />}></Route>
-          <Route
-            exact
-            path="/adminRegister"
-            element={<AdminRegister />}
-          ></Route>
+          <Route exact path="/adminRegister" element={<AdminRegister />}></Route>
           <Route exact path="/user" element={<User />}></Route>
           <Route exact path="/policeLogin" element={<PoliceLogin />}></Route>
           <Route exact path="/adminDashboard" element={<AdminDashboard/>}></Route>
+          <Route exact path="/policeRegister" element={<PoliceRegister/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

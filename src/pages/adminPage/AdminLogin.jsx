@@ -11,9 +11,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import M from "materialize-css";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const defaultTheme = createTheme();
 
@@ -57,15 +58,11 @@ export default function AdminLogin() {
         );
         console.log("API Response:", response.data);
         if (response.data.error) {
-          M.toast({ html: response.data.error, classes: "#f44336 red" });
+          toast.error(response.data.error)
           return;
         } 
         else {
-
-          M.toast({
-            html: response.data.message,
-            classes: "#2e7d32 green darken-3",
-          });
+          toast.success(response.data.message)
           setTimeout(()=>{
             navigate("/adminDashboard"); // user will navigeted to login page after successful signup.
           },1000)
@@ -78,7 +75,8 @@ export default function AdminLogin() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
+        <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -174,5 +172,7 @@ export default function AdminLogin() {
         </Grid>
       </Grid>
     </ThemeProvider>
+    <ToastContainer/>
+    </>
   );
 }
