@@ -19,6 +19,8 @@ import "react-toastify/dist/ReactToastify.css";
 const defaultTheme = createTheme();
 
 export default function AdminLogin() {
+
+  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -53,7 +55,7 @@ export default function AdminLogin() {
     } else {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:3002/api/admin/adminLogin",
+          uri+"/api/admin/adminLogin",
           formData
         );
         console.log("API Response:", response.data);

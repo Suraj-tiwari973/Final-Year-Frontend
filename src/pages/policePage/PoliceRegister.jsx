@@ -21,6 +21,8 @@ const PoliceRegister = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
     console.log("triggered");
 
     if (contact.length !== 10) {
@@ -46,7 +48,7 @@ const PoliceRegister = () => {
     setFormValid(true);
     
     try {
-      const response = await axios.post("http://127.0.0.1:3002/api/police/policeRegister",{policeId,name,contact,email,password},{
+      const response = await axios.post(uri+"/api/police/policeRegister",{policeId,name,contact,email,password},{
         headers:{
           "Content-Type":"application/json",
         },

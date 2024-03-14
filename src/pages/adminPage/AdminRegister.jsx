@@ -22,6 +22,8 @@ const defaultTheme = createTheme();
 
 export default function AdminRegister() {
 
+  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     adminId: "",
     password: "",
@@ -57,7 +59,7 @@ export default function AdminRegister() {
     } else {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:3002/api/admin/adminRegister",
+          uri+"/api/admin/adminRegister",
           formData,        {
             headers: {
               "Content-Type": "application/json",

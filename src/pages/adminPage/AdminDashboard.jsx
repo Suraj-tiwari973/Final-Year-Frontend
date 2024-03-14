@@ -2,18 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./admin.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
   const [policeData, setPoliceData] = useState([]);
 
+  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3002/api/admin/getPoliceData")
+      .get(uri+"/api/admin/getPoliceData")
       .then((response) => {
         console.log(response);
-        setPoliceData(response.data.message);
+        if(response.data.error){
+          toast.error(response.data.error)
+          return;
+        }
+        else{
+          toast.success(response.data.message);
+          setPoliceData(response.data.message);
+        }
       })
       .catch((error) => {
         console.log("Error while fetching :", error);
