@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
   const fetchData = () => {
     axios
-      .get("http://127.0.0.1:3002/api/police/getPoliceData")
+      .get(uri+"/api/police/getPoliceData")
       .then((response) => {
         console.log(response);
         if (response.data.error) {
