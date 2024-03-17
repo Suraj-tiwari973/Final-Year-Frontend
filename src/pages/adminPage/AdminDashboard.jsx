@@ -13,15 +13,17 @@ const AdminDashboard = () => {
   const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     axios
-      .get(uri+"/api/admin/getPoliceData")
+      .get("http://127.0.0.1:3002/api/police/getPoliceData")
       .then((response) => {
         console.log(response);
-        if(response.data.error){
-          toast.error(response.data.error)
-          return;
-        }
-        else{
+        if (response.data.error) {
+          toast.error(response.data.error);
+        } else {
           toast.success(response.data.message);
           setPoliceData(response.data.message);
         }
@@ -29,7 +31,32 @@ const AdminDashboard = () => {
       .catch((error) => {
         console.log("Error while fetching :", error);
       });
-  }, []);
+  };
+
+  const deletePolice = (policeId) => {
+    axios
+      .delete(uri+`/api/police/deletePoliceData/${policeId}`)
+      .then((response) => {
+        if (response.data.message) {
+          toast.success(response.data.message);
+          // Fetch updated data after deletion
+          fetchData();
+        } else {
+          toast.error(response.data.error);
+        }
+      })
+      .catch((error) => {
+        console.log("Error while deleting:", error);
+        toast.error("Error occurred while deleting Police ID.");
+      });
+  };
+
+  const handleDelete = () => {
+    const policeId = prompt("Enter Police ID to delete:");
+    if (policeId !== null) {
+      deletePolice(policeId);
+    }
+  };
 
   return (
     <>
@@ -44,7 +71,9 @@ const AdminDashboard = () => {
           >
             Add PID
           </button>
-          <button className="button">Delete PID</button>
+          <button className="button" onClick={handleDelete}>
+            Delete PID
+          </button>
         </div>
       </div>
       <div className="table--container">
@@ -71,6 +100,7 @@ const AdminDashboard = () => {
           </tbody>
         </table>
       </div>
+      <ToastContainer/>
     </>
   );
 };

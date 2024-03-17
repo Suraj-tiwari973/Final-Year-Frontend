@@ -43,8 +43,8 @@ export default function AdminLogin() {
 
     // perform password validation...
 
-    if (formData.password.length < 8) {
-      setPasswordError("Password must be at least 8 characters long.");
+    if (formData.password.length < 4) {
+      setPasswordError("Password must be at least 4 characters long.");
       setIsFormValid(false);
       return;
     }
@@ -54,8 +54,7 @@ export default function AdminLogin() {
       return;
     } else {
       try {
-        const response = await axios.post(
-          uri+"/api/admin/adminLogin",
+        const response = await axios.post(uri+"/api/admin/adminLogin",
           formData
         );
         console.log("API Response:", response.data);

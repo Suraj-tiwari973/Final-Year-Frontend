@@ -1,14 +1,15 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Home from "./pages/homePage/Home";
 import AdminLogin from "./pages/adminPage/AdminLogin";
 import AdminRegister from "./pages/adminPage/AdminRegister";
 import User from "./pages/userPage/UserLogin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import PoliceLogin from "./pages/policePage/PoliceLogin";
 import AdminDashboard from "./pages/adminPage/AdminDashboard";
 import PoliceRegister from "./pages/policePage/PoliceRegister";
+import PoliceDashboard from "./pages/policePage/PoliceDashboard";
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/policeLogin" element={<PoliceLogin />}></Route>
           <Route exact path="/adminDashboard" element={<AdminDashboard/>}></Route>
           <Route exact path="/policeRegister" element={<PoliceRegister/>}></Route>
+          <Route exact path="/policeDashboard" element={<PoliceDashboard/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
