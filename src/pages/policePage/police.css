@@ -31,4 +31,35 @@
     font-weight: bold;
   }
   
+  .table--container {
+    max-height: 90vh; /* Set the desired height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  .police--table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 80px;
+
+  }
+  
+  .police-table th,
+  .police-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .police-table th {
+    background-color: #eee;
+  }
+  
+  /* Sticky header */
+  .police-table th {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    color: #fff;
+  }
   
