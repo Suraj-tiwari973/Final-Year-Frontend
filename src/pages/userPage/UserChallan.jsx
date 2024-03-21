@@ -40,7 +40,7 @@ const UserChallan = () => {
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3002/api/rtoData/getUserData/${vehicleNumber}`
+        uri+`/api/rtoData/getUserData/${vehicleNumber}`
       );
       console.log(response.data);
       if (response.data.error) {
@@ -61,7 +61,7 @@ const UserChallan = () => {
   const createUserChallan = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3002/api/createUserChallan/userChallan",
+        uri+"/api/createUserChallan/userChallan",
         { vehicleNumber, name, email, contact, ruleViolated, amount },
         {
           headers: {
