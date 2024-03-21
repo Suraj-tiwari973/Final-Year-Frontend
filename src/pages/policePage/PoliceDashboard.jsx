@@ -126,10 +126,9 @@ const PoliceDashboard = () => {
         <table className="table police--table">
           <thead>
             <tr>
-              <th scope="col">Challan No</th>
+              <th scope="col">Vehical No</th>
               <th scope="col">Name</th>
               <th scope="col">Contact No</th>
-              <th scope="col">Vehical No</th>
               <th scope="col">Email</th>
               <th scope="col">Rule Voileted</th>
               <th scope="col">Due Payment</th>
@@ -140,10 +139,9 @@ const PoliceDashboard = () => {
             {dummyData.map((item, key) => {
               return (
                 <tr key={key}>
-                  <td>{item.challanNumber}</td>
+                  <td>{item.vehicleNumber}</td>
                   <td>{item.name}</td>
                   <td>{item.contact}</td>
-                  <td>{item.vehicleNumber}</td>
                   <td>{item.email}</td>
                   <td>{item.ruleViolated}</td>
                   <td style={{fontWeight:'bold',color:"green"}}>{item.duePayment}</td>
