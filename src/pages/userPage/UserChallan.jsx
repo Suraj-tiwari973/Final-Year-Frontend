@@ -16,6 +16,7 @@ const UserChallan = () => {
   const [ruleViolated, setRuleViolated] = useState("");
   const [amount, setAmount] = useState("");
   const [userDataFetched, setUserDataFetched] = useState(false); // Track whether user data is fetched
+  const [date, setDate] = useState("");
 
   // Mapping of rule violations to their corresponding amounts
   const ruleViolationAmounts = {
@@ -62,25 +63,26 @@ const UserChallan = () => {
     try {
       const response = await axios.post(
         uri+"/api/createUserChallan/userChallan",
-        { vehicleNumber, name, email, contact, ruleViolated, amount },
+        { vehicleNumber, name, email, contact, ruleViolated, date, amount },
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      console.log(response);
 
       if (response.data.error) {
         toast.error(response.data.error);
         return;
-      } else {
+      } 
+      else {
         toast.success(response.data.message);
         setTimeout(() => {
           navigate("/policeDashboard");
         }, 1000);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.log("Error while creating challan", error);
     }
   };
@@ -96,6 +98,11 @@ const UserChallan = () => {
     const selectedRule = e.target.value;
     setRuleViolated(selectedRule);
     setAmount(ruleViolationAmounts[selectedRule]);
+  };
+
+    const handleDateChange = (e) => {
+    const value = e.target.value;
+    setDate(value);
   };
 
   return (
@@ -173,6 +180,7 @@ const UserChallan = () => {
               id="ruleViolated"
               value={ruleViolated}
               onChange={handleRuleViolationChange}
+              required
             >
               <option value="">Select a rule</option>
               <option value="Speeding">Speeding</option>
@@ -181,6 +189,20 @@ const UserChallan = () => {
                 Traffic Signal Violation
               </option>
             </select>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="date" className="form-label">
+              Date
+            </label>
+            <input
+              type="date"
+              className="form-control"
+              id="date"
+              value={date}
+              onChange={handleDateChange}
+              required
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="amount" className="form-label">
