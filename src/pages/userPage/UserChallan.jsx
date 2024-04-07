@@ -5,7 +5,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UserChallan = () => {
-  const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
+  let uri;
+
+  if (process.env.NODE_ENV === 'development') {
+      // Running in local development environment
+      uri = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+  } else {
+      // Running in production or staging environment
+      uri = process.env.REACT_APP_API_URI;
+  }
 
   const navigate = useNavigate();
 

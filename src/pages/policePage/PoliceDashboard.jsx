@@ -9,27 +9,15 @@ const PoliceDashboard = () => {
   const navigate = useNavigate();
   const [userChallanData, setUserChallanData] = useState([]);
 
-  const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
+  let uri;
 
-  // useEffect(() => {
-  //   fetchUserChallanData();
-  // }, []);
-
-  // const fetchUserChallanData = async () => {
-  //   try {
-  //     const response = await axios.get(uri + "api/police/getUserChallanData");
-  //     console.log(response);
-  //     // if (response.data.error) {
-  //     //   toast.error(response.data.error);
-  //     // } else {
-  //     //   setUserChallanData(response.data.message); // Assuming response.data.message is an array
-  //     // }
-  //   } 
-  //   catch (error) {
-  //     console.log("Error while fetching record:", error);
-  //     toast.error("Error while fetching data");
-  //   }
-  // };
+  if (process.env.NODE_ENV === 'development') {
+      // Running in local development environment
+      uri = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+  } else {
+      // Running in production or staging environment
+      uri = process.env.REACT_APP_API_URI;
+  }
 
   useEffect(() => {
     fetchUserChallanData();
