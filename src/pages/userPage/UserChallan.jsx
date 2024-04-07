@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UserChallan = () => {
-  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+  const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
 
   const navigate = useNavigate();
 
@@ -20,17 +20,27 @@ const UserChallan = () => {
 
   // Mapping of rule violations to their corresponding amounts
   const ruleViolationAmounts = {
-    Speeding: 100,
-    "Parking Violation": 50, 
-    "Traffic Signal Violation": 150, 
+    Speeding: 1000,
+    "Parking Violation": 500, 
+    "Traffic Signal Violation": 1500,
+    "Without Helmet":1000,
+    Tripling:2000,
+    "Wrong Side":500
   };
 
   useEffect(() => {
-    // Fetch user data when component mounts
     if (vehicleNumber) {
-      fetchUserData();
+      const timeoutId = setTimeout(() => {
+        fetchUserData();
+      }, 3000);
+
+      // Cleanup function to clear the timeout if vehicleNumber changes before the timeout completes
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-  }, [vehicleNumber]);
+  },[vehicleNumber]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,8 +55,12 @@ const UserChallan = () => {
       );
       console.log(response.data);
       if (response.data.error) {
+        toast.error(response.data.error);
         setUserDataFetched(false);
-      } else {
+        return;
+      } 
+      else {
+        toast.success("Valid Vehical Number")
         console.log(response.data);
         const userData = response.data.message;
         setName(userData.name);
@@ -62,7 +76,7 @@ const UserChallan = () => {
   const createUserChallan = async () => {
     try {
       const response = await axios.post(
-        uri+"/api/createUserChallan/userChallan",
+        uri+"/api/police/createUserChallan",
         { vehicleNumber, name, email, contact, ruleViolated, date, amount },
         {
           headers: {
@@ -188,6 +202,9 @@ const UserChallan = () => {
               <option value="Traffic Signal Violation">
                 Traffic Signal Violation
               </option>
+              <option value="Without Helmet">Without Helmet</option>
+              <option value="Tripling">Tripling</option>
+              <option value="Wrong Side">Wrong Side</option>
             </select>
           </div>
 

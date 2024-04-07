@@ -22,7 +22,7 @@ const defaultTheme = createTheme();
 
 export default function AdminRegister() {
 
-  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+  const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
 
   const [formData, setFormData] = useState({
     adminId: "",

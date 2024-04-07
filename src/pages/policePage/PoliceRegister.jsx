@@ -22,7 +22,7 @@ const PoliceRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+    const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
     console.log("triggered");
 
     if (contact.length !== 10) {

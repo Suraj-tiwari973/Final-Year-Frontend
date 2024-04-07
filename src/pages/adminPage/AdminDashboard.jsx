@@ -10,7 +10,7 @@ const AdminDashboard = () => {
 
   const [policeData, setPoliceData] = useState([]);
 
-  const uri = process.env.REACT_APP_API_URI || process.env.REACT_APP_API_URL;
+  const uri = process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URI;
 
   useEffect(() => {
     fetchData();
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
         }
       })
       .catch((error) => {
-        console.log("Error while fetching :", error);
+        console.log("Error while fetching records :", error);
       });
   };
 
