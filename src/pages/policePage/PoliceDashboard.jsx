@@ -48,7 +48,7 @@ const PoliceDashboard = () => {
           <h3>Police Dashboard</h3>
         </div>
         <div className="right">
-          <button className="button" onClick={() => navigate("/userChallan")}>
+          <button className="btn bg-danger" onClick={() => navigate("/userChallan")}>
             New Challan
           </button>
           {/* <button className="button">Delete Challan</button> */}
@@ -63,7 +63,7 @@ const PoliceDashboard = () => {
               <th scope="col">Contact No</th>
               <th scope="col">Email</th>
               <th scope="col">Rule Violated</th>
-              <th scope="col">Date of Voilation</th>
+              <th scope="col">Challan Date</th>
               <th scope="col">Due Payment</th>
               <th scope="col">Status</th>
             </tr>

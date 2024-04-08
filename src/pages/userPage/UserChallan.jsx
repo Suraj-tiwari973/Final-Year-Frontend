@@ -68,7 +68,7 @@ const UserChallan = () => {
         return;
       } 
       else {
-        toast.success("Valid Vehical Number")
+        toast.success("Valid Vehicle Number")
         console.log(response.data);
         const userData = response.data.message;
         setName(userData.name);
@@ -99,6 +99,8 @@ const UserChallan = () => {
       } 
       else {
         toast.success(response.data.message);
+        // Trigger email notification after successfully creating the challan
+        await sendEmailNotification();
         setTimeout(() => {
           navigate("/policeDashboard");
         }, 1000);
@@ -125,6 +127,33 @@ const UserChallan = () => {
     const handleDateChange = (e) => {
     const value = e.target.value;
     setDate(value);
+  };
+
+  // Function to send email notification
+  const sendEmailNotification = async () => {
+    const paymentLink = "www.google.com";
+    try {
+      await axios.post(
+        uri + "/api/police/sendEmailNotification",
+        {
+          recipientEmail: email,
+          subject: `Challan Notification`,
+          message: `
+            <p>Dear <strong>${name}</strong>,</p>
+            <p>Your challan has been created as you have violated the rule <strong>${ruleViolated}</strong> on date <strong>${date}</strong>.</p>
+            <p>Vehicle Number: <strong>${vehicleNumber}</strong></p>
+            <p>To make the payment, please click the button below:</p>
+            <p>
+              <a href="${paymentLink}" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; display: inline-block; text-decoration: none; border-radius: 4px;">Pay Now</a>
+            </p>
+            <p>Regards,<br>Traffic Police Department.</p>
+          `
+        }
+      );
+    } 
+    catch (error) {
+      console.log("Error sending email notification:", error);
+    }
   };
 
   return (

@@ -62,4 +62,9 @@
     background-color: #333;
     color: #fff;
   }
-  
+  input[type='date']{
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+  }

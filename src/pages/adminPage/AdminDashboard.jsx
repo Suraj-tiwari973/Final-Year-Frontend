@@ -74,12 +74,12 @@ const AdminDashboard = () => {
         </div>
         <div className="right">
           <button
-            className="button"
+            className="btn bg-danger"
             onClick={() => navigate("/policeRegister")}
           >
             Add PID
           </button>
-          <button className="button" onClick={handleDelete}>
+          <button className="btn bg-danger" onClick={handleDelete}>
             Delete PID
           </button>
         </div>
