@@ -68,7 +68,6 @@
     border-radius: 12px;
     font-size: 28px;
     font-weight: bold;
-    text-align: center;
   }
   input:focus{
     outline: none;

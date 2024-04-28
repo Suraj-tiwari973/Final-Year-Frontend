@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 const UserCheckChallan = () => {
   const [vehicleNumber, setVehicleNumber] = useState('');
-  const [showContactForm, setShowContactForm] = useState(false);
   const [email, setEmail] = useState('');
 
   const handleInputChange = (event) => {
@@ -17,7 +16,6 @@ const UserCheckChallan = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setShowContactForm(true); // Show the contact form when the button is clicked
   };
 
   const handleEmailChange = (event) => {
@@ -62,6 +60,7 @@ const UserCheckChallan = () => {
               placeholder="UP 70 HD76XX" 
               value={vehicleNumber} 
               onChange={handleInputChange} 
+              required
             />
             <label htmlFor="vehicleNumber">Enter registerd Email</label>
             <div className="contact-number-container">
@@ -71,8 +70,9 @@ const UserCheckChallan = () => {
               id="email" 
               name="email" 
               placeholder="abc1234@gmail.com" 
-              value={vehicleNumber} 
+              value={email} 
               onChange={handleEmailChange}
+              required
               style={{border:"none",width:"85%"}} 
             />
             </div>
