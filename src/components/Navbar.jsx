@@ -9,7 +9,7 @@ const Navbar = () => {
     >
       <div className="container-fluid mx-4">
         <Link className="navbar-brand text-light fw-bold fs-3" to="/">
-          E-Challan
+          eChallan
         </Link>
         <button
           className="navbar-toggler bg-light"
@@ -24,11 +24,11 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav ms-auto fs-5">
-            {/* <li className="nav-item">
-              <Link className="nav-link active text-light" aria-current="page" to="/">
-                Home
+            <li className="nav-item">
+              <Link className="nav-link active text-light" aria-current="page" to="/userCheckChallan">
+                Pay Challan
               </Link>
-            </li> */}
+            </li>
             <li className="nav-item dropdown">
               <Link
                 className="nav-link dropdown-toggle text-light"
@@ -40,11 +40,7 @@ const Navbar = () => {
                 Login
               </Link>
               <ul className="dropdown-menu">
-                {/* <li>
-                  <Link className="dropdown-item" to="/adminRegister">
-                    Admin Signup
-                  </Link>
-                </li> */}
+
                 <li>
                   <Link className="dropdown-item" to="/adminLogin">
                     Admin Login

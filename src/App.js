@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Home from "./pages/homePage/Home";
 import AdminLogin from "./pages/adminPage/AdminLogin";
 import AdminRegister from "./pages/adminPage/AdminRegister";
-import User from "./pages/userPage/UserLogin";
+import UserCheckChallan from "./pages/userPage/UserCheckChallan";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PoliceLogin from "./pages/policePage/PoliceLogin";
 import AdminDashboard from "./pages/adminPage/AdminDashboard";
@@ -21,7 +21,7 @@ const App = () => {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/adminLogin" element={<AdminLogin />}></Route>
           <Route exact path="/adminRegister" element={<AdminRegister />}></Route>
-          <Route exact path="/user" element={<User />}></Route>
+          <Route exact path="/userCheckChallan" element={<UserCheckChallan />}></Route>
           <Route exact path="/policeLogin" element={<PoliceLogin />}></Route>
           <Route exact path="/adminDashboard" element={<AdminDashboard/>}></Route>
           <Route exact path="/policeRegister" element={<PoliceRegister/>}></Route>
