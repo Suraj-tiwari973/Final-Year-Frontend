@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/adminPage/AdminDashboard";
 import PoliceRegister from "./pages/policePage/PoliceRegister";
 import PoliceDashboard from "./pages/policePage/PoliceDashboard";
 import UserChallan from "./pages/userPage/UserChallan";
+import PageNotFound from "./components/PageNotFound";
 
 
 const App = () => {
@@ -27,6 +28,8 @@ const App = () => {
           <Route exact path="/policeRegister" element={<PoliceRegister/>}></Route>
           <Route exact path="/policeDashboard" element={<PoliceDashboard/>}></Route>
           <Route exact path="/userChallan" element={<UserChallan/>}></Route>
+          <Route exact path="/noChallanFound" element={<UserChallan/>}></Route>
+          <Route exact path="/*" element={<PageNotFound/>}/>
         </Routes>
       </BrowserRouter>
     </div>

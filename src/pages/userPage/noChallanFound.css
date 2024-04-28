@@ -1,0 +1,24 @@
+.no-details-found {
+    text-align: center;
+    margin-top: 50px; /* Adjust as needed */
+  }
+  
+  .no-details-found h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .no-details-found p {
+    font-size: 18px;
+  }
+  
+  .centered-button {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
