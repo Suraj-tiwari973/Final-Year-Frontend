@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
-import greenTick from '../../assets/greenTick.png';
-import './user.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-
+import React, { useState, useEffect } from "react";
+import greenTick from "../../assets/greenTick.png";
+import "./user.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserCheckChallan = () => {
-
   let uri;
 
-  if (process.env.NODE_ENV === 'development') {
-      // Running in local development environment
-      uri = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+  if (process.env.NODE_ENV === "development") {
+    // Running in local development environment
+    uri = process.env.REACT_APP_API_URL || "http://localhost:3002";
   } else {
-      // Running in production or staging environment
-      uri = process.env.REACT_APP_API_URI;
+    // Running in production or staging environment
+    uri = process.env.REACT_APP_API_URI;
   }
 
-
-  const [vehicleNumber, setVehicleNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [vehicleNumber, setVehicleNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [otpSent, setOtpSent] = useState(false);
-  const [enteredOtp, setEnteredOtp] = useState('');
+  const [enteredOtp, setEnteredOtp] = useState("");
   const [isOtpMatched, setIsOtpMatched] = useState(false);
 
   const handleInputChange = (event) => {
@@ -33,52 +32,76 @@ const UserCheckChallan = () => {
     setEmail(event.target.value);
   };
 
-
   const sendOTP = async () => {
     try {
-      const response = await axios.post(uri+'/api/userChallan/send-otp', { email });
-      if (response.status === 200) {
-        console.log('otp sent');
-        setOtpSent(true);
+      console.log("send otp hit");
+      const response = await axios.post(uri + "/api/userChallan/send-otp", {
+        email,
+      });
+      if (response.data.error) {
+        console.error("Failed to send OTP");
+        toast.error(response.data.error);
+        return;
       } else {
-        console.error('Failed to send OTP');
+        console.log("otp sent");
+        toast.success(response.data.message);
+        setOtpSent(true); // Only set otpSent to true if OTP was sent successfully
+        console.log(otpSent);
       }
     } catch (error) {
-      console.error('Error sending OTP:', error);
+      console.error("Error sending OTP:", error);
     }
   };
 
+  // useeffect for updating the setOTP state immediatly.
+  useEffect(() => {
+    if (otpSent) {
+      console.log("OTP sent", otpSent);
+      setTimeout(() => {
+        const enteredOTP = prompt(
+          "Please enter the OTP received on your email:"
+        );
+        if (enteredOTP) {
+          console.log("otp received");
+          setEnteredOtp(enteredOTP);
+        }
+      }, 2000);
+      setOtpSent(false);
+    }
+  }, [otpSent]);
+
   const handleGetOTP = async () => {
-    await sendOTP();
-    const enteredOTP = prompt('Please enter the OTP received on your email:');
-    if (enteredOTP) {
-      console.log('otp received');
-      setEnteredOtp(enteredOTP);
+    try {
+      await sendOTP();
+    } catch (error) {
+      console.error("Error getting OTP:", error);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(uri+'/api/userChallan/verify-otp', { clientOTP: enteredOtp });
-      if (response.status === 200) {
-        console.log('otp matched');
+      console.log("clicked");
+      const response = await axios.post(uri + "/api/userChallan/verify-otp", {
+        clientOTP: enteredOtp,
+      });
+      console.log("Response:", response); // Log the full response for debugging
+      if (response.data.message) {
+        console.log("otp matched");
+        toast.success(response.data.message);
         setIsOtpMatched(true);
-      } 
-      else {
-        console.log('Invalid otp');
-        alert('Invalid OTP! Please try again.');
+      } else {
+        console.log("Invalid otp");
+        toast.error(response.data.error);
       }
-    } 
-    catch (error) {
-      console.error('Error verifying OTP:', error);
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
     }
   };
 
-
   return (
     <>
-      <header className='fixed-top'>
+      <header className="fixed-top">
         <h2>eChallan</h2>
       </header>
       <div className="item-container">
@@ -86,15 +109,15 @@ const UserCheckChallan = () => {
           <div className="heading">
             <h1>Check Traffic Challan Status & Pay Online</h1>
             <div className="paragraph-lists">
-              <img src={greenTick} alt="GreenTick" className='greenTickImage'/>
+              <img src={greenTick} alt="GreenTick" className="greenTickImage" />
               <p>View your traffic eChallans for Free</p>
             </div>
             <div className="paragraph-lists">
-              <img src={greenTick} alt="GreenTick" className='greenTickImage'/>
+              <img src={greenTick} alt="GreenTick" className="greenTickImage" />
               <p>Pay your traffic eChallans with ease</p>
             </div>
             <div className="paragraph-lists">
-            <img src={greenTick} alt="GreenTick" className='greenTickImage'/>
+              <img src={greenTick} alt="GreenTick" className="greenTickImage" />
               <p>No hassle of court visits</p>
             </div>
           </div>
@@ -103,40 +126,54 @@ const UserCheckChallan = () => {
         <div className="right-section">
           <form onSubmit={handleSubmit}>
             <label htmlFor="vehicleNumber">Enter vehicle number</label>
-            <input 
-              type="text" 
-              id="vehicleNumber" 
-              name="vehicleNumber" 
-              placeholder="UP 70 HD76XX" 
-              value={vehicleNumber} 
-              onChange={handleInputChange} 
+            <input
+              type="text"
+              id="vehicleNumber"
+              name="vehicleNumber"
+              placeholder="UP 70 HD76XX"
+              value={vehicleNumber}
+              onChange={handleInputChange}
               required
+              autoComplete="off"
             />
             <label htmlFor="email">Enter registerd Email</label>
             <div className="contact-number-container">
-              <div className="contact-input">
-              <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              placeholder="abc1234@gmail.com" 
-              value={email} 
-              onChange={handleEmailChange}
-              required
-              style={{border:"none",width:"85%"}} 
-            />
+              <div className="contact-input w-80">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="abc1234@gmail.com"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                  autoComplete="off"
+                  style={{ border: "none" }}
+                />
+              </div>
+              <div
+                className="get-otp-text d-flex align-items-center"
+                style={{ width: "100%", borderRadius: "12" }}
+              >
+                <Link
+                  to="#"
+                  onClick={handleGetOTP}
+                  style={{ marginLeft: "auto", marginRight: "10px" }}
+                >
+                  Get OTP
+                </Link>
+              </div>
             </div>
-            <div className='get-otp-text d-flex align-items-center' style={{width:"15%",}}>
-              <Link to="#" onClick={handleGetOTP} >Get OTP</Link>
-            </div>
-            </div>
-            <button type="submit" disabled={!otpSent || !isOtpMatched}>VIEW CHALLANS</button>
-            <p style={{textAlign:"center",fontSize:"20px"}}>See your challan and feel free to pay here.</p>
+            <button type="submit">VIEW CHALLANS</button>
+            <p style={{ textAlign: "center", fontSize: "20px" }}>
+              See your challan and feel free to pay here.
+            </p>
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
-}
+};
 
 export default UserCheckChallan;
