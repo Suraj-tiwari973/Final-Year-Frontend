@@ -25,6 +25,7 @@ const UserChallan = () => {
   const [amount, setAmount] = useState("");
   const [userDataFetched, setUserDataFetched] = useState(false); // Track whether user data is fetched
   const [date, setDate] = useState("");
+  const [status,setStatus] = useState("");
 
   // Mapping of rule violations to their corresponding amounts
   const ruleViolationAmounts = {
@@ -83,9 +84,10 @@ const UserChallan = () => {
 
   const createUserChallan = async () => {
     try {
+      setStatus("Pending");
       const response = await axios.post(
         uri+"/api/police/createUserChallan",
-        { vehicleNumber, name, email, contact, ruleViolated, date, amount },
+        { vehicleNumber, name, email, contact, ruleViolated, date, amount,status },
         {
           headers: {
             "Content-Type": "application/json",

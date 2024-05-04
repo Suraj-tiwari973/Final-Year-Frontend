@@ -78,7 +78,7 @@ const PoliceDashboard = () => {
                 <td>{item.ruleViolated}</td>
                 <td>{item.date}</td>
                 <td style={{ fontWeight: 'bold', color: "green" }}>{item.amount}</td>
-                <td style={{ backgroundColor: 'red', color: 'white' }}>Unpaid</td>
+                <td style={{ backgroundColor: item.status === "Pending" ? "red" : "green", color: 'white' }}>{item.status === "Pending" ? "Pending" : "Paid"}</td>
               </tr>
             ))}
           </tbody>

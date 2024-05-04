@@ -12,6 +12,7 @@ import PoliceRegister from "./pages/policePage/PoliceRegister";
 import PoliceDashboard from "./pages/policePage/PoliceDashboard";
 import UserChallan from "./pages/userPage/UserChallan";
 import PageNotFound from "./components/PageNotFound";
+import UserChallanRecords from "./pages/userPage/UserChallanRecords";
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/policeDashboard" element={<PoliceDashboard/>}></Route>
           <Route exact path="/userChallan" element={<UserChallan/>}></Route>
           <Route exact path="/noChallanFound" element={<UserChallan/>}></Route>
+          <Route exact path="/userChallanRecord" element={<UserChallanRecords/>}></Route>
           <Route exact path="/*" element={<PageNotFound/>}/>
         </Routes>
       </BrowserRouter>
